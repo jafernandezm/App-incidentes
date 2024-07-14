@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+use App\Models\Resultados_Escaneos;
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -28,8 +29,16 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $resultados = Resultados_Escaneos::all();
+        //dd($resultados);
+        // return redirect()
+        // ->intended(RouteServiceProvider::HOME)
+        // ->with('resultados', $resultados);
+        //dd($resultados);
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $resultados = $resultados->toArray();
+        return redirect()->intended(RouteServiceProvider::HOME)
+            ->with('resultados', $resultados);
     }
 
     /**

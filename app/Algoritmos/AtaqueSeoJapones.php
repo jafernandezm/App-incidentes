@@ -69,7 +69,7 @@ class AtaqueSeoJapones
                 continue;
             }
         }
-        dd($results);
+        //dd($results);
         return $results;
     }
     function buscarHtmlInfectado($html, $htmlInfectados, $urlResponse) {
@@ -95,6 +95,35 @@ class AtaqueSeoJapones
         return $resultados;
     }
     
+    function buscarHtmlInfectado2($html, $htmlInfectados, $urlResponse) {
+        $resultados = [];
+        foreach ($htmlInfectados as $htmlInfectado) {
+            $htmlInfectadoPattern = $htmlInfectado->html_infectado;
+    
+            // Asegúrate de que comience con "<"
+            if (strpos($htmlInfectadoPattern, '<') !== 0) {
+                $htmlInfectadoPattern = '<' . $htmlInfectadoPattern;
+            }
+            
+            // Construye un patrón de expresión regular para encontrar el HTML infectado
+          // Construye un patrón de expresión regular para encontrar el HTML infectado
+            $pattern = "/(" . preg_quote($htmlInfectadoPattern, '/') . ".*?(>|\/>))/si";
+
+            // Encuentra todas las coincidencias
+            preg_match_all($pattern, $html, $matches);
+    
+            if (!empty($matches[0])) {
+                $resultados[] = [
+                    'tipo' => 'html_infectado',
+                    'html_infectado' => $htmlInfectado->html_infectado,
+                    'html' => array_unique($matches[0]) // Filtra duplicados
+                    //'html' => $matches[0]
+                ];
+            }
+        }
+        return $resultados;
+    }
+
     public function extraUrlsScan($html)
     {
         //dd($html);
@@ -180,7 +209,7 @@ class AtaqueSeoJapones
                     }
                 }
     
-                $resultados = $this->buscarHtmlInfectado($html, $htmlInfectados, $urlResponse);
+                $resultados = $this->buscarHtmlInfectado2($html, $htmlInfectados, $urlResponse);
                 //dd($resultados);
                 if (count($resultados) > 0) {
                     foreach ($resultados as $resultado) {

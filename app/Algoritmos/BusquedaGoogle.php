@@ -9,8 +9,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
 
-
-
 class BusquedaGoogle
 {
     //como creo una variable global var proxy=['https://thingproxy.freeboard.io/fetch/']
@@ -30,7 +28,7 @@ class BusquedaGoogle
         'Sec-Fetch-Site' => 'cross-site',
     ];
 
-    public function  googleSearch($queries = [], $timeout = 20, $numResults = 5) {
+    public function  googleSearch($queries = [], $timeout = 20, $numResults = 10) {
         $options = [
             RequestOptions::VERIFY => false,
             RequestOptions::TIMEOUT => $timeout,
@@ -41,10 +39,10 @@ class BusquedaGoogle
             $query = str_replace(' ', '%20', $query);
             //dd($query);
             $url = 'https://www.google.com/search?q=' . $query . '&num=' . $numResults;
-            //dd($url);
-            if (!empty($this->proxy)) {
-                $url = $this->proxy[0] . $url;
-            }
+            
+            // if (count($this->proxy) > 0) {
+            //     $url = $this->proxy[0] . $url;
+            // }
             //dd($url);
             try {
                 $response = $client->request('GET', $url, [
@@ -93,7 +91,7 @@ class BusquedaGoogle
         }
         //quitar el primero 
         //$results = array_slice($results, 6);
-        
+        //dd($results);
         return $results;
     }
 }

@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('escaneos', function (Blueprint $table) {
             $table->id();
-            //sitio_id, tipo, fecha, resultado
-            $table->foreignId('sitio_id')->constrained();
-            $table->string('tipo');
+            //url
+            $table->string('url')->nullable();
+            $table->uuid('escaneo_id');
+            $table->string('tipo')->nullable();
             $table->date('fecha');
             $table->string('resultado');
-            
-            $table->timestamps();
+            //fecha
+            $table->timestamps();           
         });
     }
 

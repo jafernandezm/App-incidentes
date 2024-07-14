@@ -13,6 +13,9 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        {{-- crear algo para poner js desde otros sitios --}}
+        @stack('script')
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 black:bg-gray-900">
@@ -26,7 +29,7 @@
                     </div>
                 </header>
             @endif
-
+                
             <!-- Page Content -->
             <main>
                 {{ $slot }}

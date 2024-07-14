@@ -9,7 +9,7 @@ services:
                 uid: 1000
             context: ./
             dockerfile: Dockerfile
-        container_name: Laravel-App
+        container_name: test-app
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
@@ -23,7 +23,7 @@ services:
         build:
             context: ./
             dockerfile: docker-compose/nginx.dockerfile
-        container_name: nginx-nginx
+        container_name: test-nginx
         restart: unless-stopped
         ports:
             - ${SERVER_PORT:-80}:80
@@ -35,21 +35,21 @@ services:
             - test-network
 
     pgsql:
-        image: postgres
-        # image: postgres:9.6        
-        container_name: db-pgsql
+        image: postgres:9.6
+        container_name: test-pgsql
         restart: unless-stopped
         expose:
             - 5432
         ports:
             - ${DB_PORT:-5432}:5432
         volumes:
+            #- ./dbpgsql:/docker-entrypoint-initdb.d/
+            #- dbpgsql:/docker-entrypoint-initdb.d/
             - ./dbpgsql/db:/var/lib/postgresql/data
         environment:
             POSTGRES_USER: ${DB_USERNAME:-homestead}
             POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
             POSTGRES_DB: ${DB_DATABASE:-homestead}
-            
         networks:
             - test-network
 
@@ -78,4 +78,5 @@ networks:
     test-network:
         driver: bridge
 
-
+volumes:
+    dbpgsql:

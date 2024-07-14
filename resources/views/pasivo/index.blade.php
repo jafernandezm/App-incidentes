@@ -1,53 +1,55 @@
 <x-app-layout>
+    @vite('resources/js/pasivo/app.js')
+
+    @section('content')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Pasivos') }}
         </h2>
     </x-slot>
+    {{-- comprobar si existe resultado --}}
+    <div class="mt-4 flex flex-col justify-center items-center p-4 rounded-lg shadow-md space-y-2">
+        <h1 class="text-2xl font-bold text-center">Escanear</h1>
+        <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md white:bg-gray-800">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Pasivos") }}
-                    <div class="mt-4">
-                        <h2 class="text-xl font-semibold mb-2">Resultados del Escaneo:</h2>
-                        @foreach ($resultados as $resultado)
-                            <div class="mb-4 p-4 border rounded bg-gray-50 dark:bg-gray-900">
-                                <p><strong>URL:</strong> {{ $resultado['url'] }}</p>
-                                <p><strong>Tipo:</strong> {{ $resultado['tipo'] }}</p>
-                                @if ($resultado['tipo'] == 'redireccion')
-                                    <p><strong>Redirecciones:</strong></p>
-                                    <ul class="list-disc pl-5">
-                                        @foreach ($resultado['redirecciones'] as $redireccion)
-                                            <li>{{ $redireccion }}</li>
-                                        @endforeach
-                                    </ul>
-                                @elseif ($resultado['tipo'] == 'url_infectada')
-                                    <p><strong>Detalles de la Infección:</strong></p>
-                                    <ul>
-                                        <li><strong>ID:</strong> {{ $resultado['infectada']['id'] }}</li>
-                                        <li><strong>URL Infectada:</strong> {{ $resultado['infectada']['url'] }}</li>
-                                        <li><strong>Tipo:</strong> {{ $resultado['infectada']['tipo'] }}</li>
-                                        <li><strong>Fecha:</strong> {{ $resultado['infectada']['fecha'] }}</li>
-                                        <li><strong>Creado en:</strong> {{ $resultado['infectada']['created_at'] }}</li>
-                                        <li><strong>Actualizado en:</strong> {{ $resultado['infectada']['updated_at'] }}</li>
-                                    </ul>
-                                @elseif ($resultado['tipo'] == 'html_infectado')
-                                    <p><strong>HTML Infectado:</strong> {{ $resultado['infectada'] }}</p>
-                                    <p><strong>Detalles del HTML:</strong></p>
-                                    <ul class="list-disc pl-5">
-                                        @foreach ($resultado['html'] as $detalleHtml)
-                                            <li>{{ $detalleHtml }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </div>
-                        @endforeach
+           
+                <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                    <div class="flex items-center mb-4">
+                        <label class="text-gray-700 mr-2" for="dorks">Dorks</label>
+                        <div class="flex-grow flex items-center">
+                            <input id="dorks" type="text" class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-l-md dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                            <button id="addButton" class="px-4 py-2 text-white bg-blue-500 rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                Agregar
+                            </button>
+                        </div>
                     </div>
+        
+                    <form method="POST" action="{{ route('pasivo.scanWebsite') }}">
+                        @csrf
+                        <div class="flex items-center"> 
+                            <label class="text-gray-700 " for="username">cantidad de paginas</label>
+                            <input id="username" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                        </div>
+                
+
+                        <div class="flex justify-end mt-6">
+                            <button class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-red-500  rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Enviar</button>
+                        </div>
+
+                    </form>
                 </div>
-            </div>
-        </div>
+           
+                <ul id="dorkList" class="dork-list"></ul>
+        </section>
     </div>
+    
+  
+
+    
+    @if(isset($resultados))
+        {{-- como paso a mi otro views mi resultado se llama resultado.blade.php --}}
+        @include('pasivo.resultado', ['resultados' => $resultados])
+    @endif
+    @endsection
     
 </x-app-layout>
