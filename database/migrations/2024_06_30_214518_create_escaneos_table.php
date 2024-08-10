@@ -14,15 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('escaneos', function (Blueprint $table) {
-            $table->id();
-            //url
+            $table->uuid('id')->primary();// Define UUID como clave primaria
             $table->string('url')->nullable();
-            $table->uuid('escaneo_id');
             $table->string('tipo')->nullable();
             $table->date('fecha');
             $table->string('resultado');
-            //fecha
-            $table->timestamps();           
+            $table->timestamps();         
         });
     }
 

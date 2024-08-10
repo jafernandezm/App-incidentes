@@ -6,20 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Escaneos;
-class Resultados_Escaneos extends Model
+class datos_filtrados extends Model
 {
     use HasFactory;
-     //URL, Tipo, HTML Infectado , Detalles del HTML, URL Infectada, redirecciones
-    protected $fillable = [
-    'url',
-    'data',
-    'detalle',
-    ];
+
+    protected $table = 'datos_filtrados';
+    protected $fillable = ['consulta', 'tipo', 'filtracion', 'informacion', 'data', 'escaneo_id'];
     public function escaneo()
     {
-        //un escaneo tiene muchos resultados
         return $this->belongsTo(Escaneos::class, 'id');
     }
-  
 
 }

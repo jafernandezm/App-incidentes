@@ -39,11 +39,9 @@ class BusquedaGoogle
             $query = str_replace(' ', '%20', $query);
             //dd($query);
             $url = 'https://www.google.com/search?q=' . $query . '&num=' . $numResults;
-            
             // if (count($this->proxy) > 0) {
             //     $url = $this->proxy[0] . $url;
             // }
-            //dd($url);
             try {
                 $response = $client->request('GET', $url, [
                     'headers' => [
@@ -84,14 +82,11 @@ class BusquedaGoogle
                         ];
                     }
                 }
-            } catch (RequestException $e) {
+            } catch (Exception $e) {
                 // Log the error instead of echoing it to avoid disrupting the flow
                 error_log('Request failed: ' . $e->getMessage());
             }
         }
-        //quitar el primero 
-        //$results = array_slice($results, 6);
-        //dd($results);
         return $results;
     }
 }

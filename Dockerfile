@@ -23,8 +23,11 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 #RUN echo "install ipv6 /bin/true" >> /etc/modprobe.d/disableipv6.conf
 
 # Set Google DNS server
-RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
-RUN echo "nameserver 1.1.1.1" >> /etc/resolv.conf
+#127.0.0.1
+RUN echo '#!/bin/sh\n\
+echo "nameserver 127.0.0.1" > /etc/resolv.conf\n\
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf\n\
+echo "nameserver 1.1.1.1" >> /etc/resolv.conf' > /tmp/update-resolv-conf.sh
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_pgsql mbstring exif pcntl bcmath gd

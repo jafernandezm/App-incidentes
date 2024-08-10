@@ -7,16 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Sitios;
 use App\Models\Resultados_Escaneos;
+use App\Models\datos_filtrados;
+use Illuminate\Support\Str;
+
 class Escaneos extends Model
 {
     use HasFactory;
     //escaneo_id, tipo, fecha, resultado
-    protected $fillable = [
-    'url',
-    'escaneo_id',
-    'tipo',
-    'fecha',
-    'resultado'
+      // Indica que 'id' no se autoincrementa y es un UUID
+    protected $keyType = 'string';
+    public $incrementing = false;
+    protected $fillable = ['url','tipo','fecha','resultado'
     ];
     public function resultados()
     {   
@@ -24,5 +25,17 @@ class Escaneos extends Model
         return $this->hasMany(Resultados_Escaneos::class, 'escaneo_id');
     }
 
- 
+    //crear la relacioneentre datos filtrados y escaneos
+    public function resultado_filtrado(){
+        return $this->hasMany(datos_filtrados::class, 'escaneo_id');
+    }
+      // Generar automáticamente un UUID para 'id' al crear el modelo
+      protected static function booted()
+      {
+          static::creating(function ($model) {
+              if (empty($model->id)) {
+                  $model->id = (string) Str::uuid();
+              }
+          });
+      }
 }

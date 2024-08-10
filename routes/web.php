@@ -6,7 +6,7 @@ use App\Http\Controllers\PasivoScanController;
 use App\Http\Controllers\ActivosScanController;
 //base
 use App\Http\Controllers\BaseController;
-
+USE App\Http\Controllers\DatosFiltradosController;
 
 // Route::get('/index', [BaseController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
 
@@ -20,7 +20,8 @@ Route::post('/activo', [ActivosScanController::class, 'scanWebsite'])->middlewar
 Route::get('/pasivo', [PasivoScanController::class, 'index'])->middleware(['auth', 'verified'])->name('pasivo.index');
 Route::post('/pasivo', [PasivoScanController::class, 'scanWebsite'])->middleware(['auth', 'verified'])->name('pasivo.scanWebsite');
 
-
+Route::get('/filtrados', [DatosFiltradosController::class, 'index'])->middleware(['auth', 'verified'])->name('filtrados.index');
+Route::post('/filtrados', [DatosFiltradosController::class, 'store'])->middleware(['auth', 'verified'])->name('filtrados.store');
 
 Route::get('/', [BaseController::class, 'welcome']);
 
