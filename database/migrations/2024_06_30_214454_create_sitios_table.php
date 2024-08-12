@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('sitios', function (Blueprint $table) {
             $table->id();
-            //url nombre estado(infectado,limpioS) 
+            //url nombre estado(infectado,limpio) 
             $table->string('url');
             $table->string('nombre');
             $table->string('estado')->default('limpio');

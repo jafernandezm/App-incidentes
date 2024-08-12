@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dominios__listas', function (Blueprint $table) {
+        Schema::create('tipos', function (Blueprint $table) {
             $table->id();
-            // url ,tipo, fecha_adicion
-            $table->string('url');
-            $table->string('tipo');
-        
+            //nombre, descripcion
+            $table->enum('nombre', ['urlInfectada', 'htmlInfectado', 'dorksPasivo', 'dorksActivo', 'NDSW'])->default('urlInfectada');
+            $table->string('descripcion');
+    
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dominios__listas');
+        Schema::dropIfExists('tipos');
     }
 };

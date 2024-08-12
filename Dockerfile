@@ -13,8 +13,21 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libmcrypt-dev \
     libxml2-dev \
+    golang-go \
     zip \
-    unzip
+    unzip \
+    wget
+RUN apt-get install -y whatweb
+RUN apt-get install -y gobuster
+
+# Instala Gobuster
+RUN go install github.com/OJ/gobuster/v3@latest
+# Asignar permisos al ejecutable de whatweb
+# Asignar permisos al ejecutable de whatweb
+RUN chmod +x /usr/bin/whatweb
+
+
+
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -42,7 +55,7 @@ RUN mkdir -p /home/$user/.composer && \
 
 # Set working directory
 WORKDIR /var/www
-
+RUN mkdir -p /var/www/html/whatweb
 USER $user
 
 #RUN php artisan migrate:fresh --seed 

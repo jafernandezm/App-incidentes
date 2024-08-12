@@ -1,0 +1,14 @@
+https://cmt.gob.bo/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2
+https://cmt.gob.bo/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min.js?ver=4.0.2
+https://cmt.gob.bo/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.14.1
+https://cmt.gob.bo/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.14.1
+https://cmt.gob.bo/wp-content/themes/flixita/assets/js/custom.js?ver=6.5.3
+https://cmt.gob.bo/wp-content/themes/flixita/assets/js/wow.min.js?ver=6.5.3
+https://cmt.gob.bo/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.14.1
+https://cmt.gob.bo/wp-content/plugins/add-to-any/addtoany.min.js?ver=1.1
+https://cmt.gob.bo/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1
+https://cmt.gob.bo/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.14.1
+https://cmt.gob.bo/wp-content/themes/flixita/assets/js/owl.carousel.min.js?ver=6.5.3
+https://cmt.gob.bo/wp-content/themes/flixita/assets/js/bootstrap.min.js?ver=6.5.3
+https://cmt.gob.bo/wp-includes/js/jquery/jquery.min.js?ver=3.7.1
+https://cmt.gob.bo/wp-includes/js/comment-reply.min.js?ver=6.5.3

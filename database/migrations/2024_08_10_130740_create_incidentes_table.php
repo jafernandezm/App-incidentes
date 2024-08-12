@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dorks', function (Blueprint $table) {
+        Schema::create('incidentes', function (Blueprint $table) {
             $table->id();
-            // dork, fecha
-            $table->string('dork');
+            $table->foreignId('tipo_id')->constrained('tipos')->onDelete('cascade'); // Referencia al tipo
+            //tipo, descripcion, fecha, contenido, tipo_id
+            //$table->string('tipo');
+            $table->string('contenido');
+            $table->string('descripcion');
             $table->date('fecha');
             $table->timestamps();
         });
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dorks');
+        Schema::dropIfExists('incidentes');
     }
 };

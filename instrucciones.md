@@ -23,3 +23,15 @@ composer require guzzlehttp/guzzle
 npm install
 sudo npm run dev
 ```
+
+### configuracion para ejecutar comandos de bash 
+```r
+sudo adduser testusr
+
+sudo visudo
+
+testusr ALL=(ALL) NOPASSWD: /usr/bin/whatweb
+
+```
+
+

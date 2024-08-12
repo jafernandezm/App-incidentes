@@ -25,7 +25,9 @@ class PasivoRequest extends FormRequest
     {
         return [
             'dorks' => 'required|string|max:255',
-            'cantidad' => 'required|integer|min:1'
+            'cantidad' => 'required|integer|min:1|max:100',
+            'excludeSites' => 'nullable',
+            'excludeSitesHidden' => 'nullable',
         ];
     }
 }

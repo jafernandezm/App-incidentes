@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ListaNegra extends Model
+class Tipo extends Model
 {
     use HasFactory;
-    // url tipo fecha
-    protected $fillable = ['url', 'tipo', 'fecha'];
+    //nombre, descripcion
+    protected $fillable = ['nombre', 'descripcion'];
 }

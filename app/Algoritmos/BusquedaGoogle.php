@@ -9,6 +9,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
 
+//models
+use App\Models\Incidente;
 class BusquedaGoogle
 {
     //como creo una variable global var proxy=['https://thingproxy.freeboard.io/fetch/']
