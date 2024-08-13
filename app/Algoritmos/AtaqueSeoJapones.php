@@ -11,7 +11,6 @@ use GuzzleHttp\MultiRequest;
 use GuzzleHttp\Psr7\Request;
 //models
 use App\Models\Incidente;
-//algoritmos
 
 //composer require guzzlehttp/promises
 use App\Algoritmos\BusquedaGoogle;
@@ -20,13 +19,10 @@ class AtaqueSeoJapones
 {
     private function buscarHtmlInfectado($html, $urlResponse, $url)
     {
-        // Obtener patrones de HTML infectado
-        $htmlInfectados = Incidente::where('tipo_id', 2)->pluck('contenido')->toArray();
-        
+        $htmlInfectados = Incidente::where('tipo_id', 2)->pluck('contenido')->toArray();   
         $urlOrigen =$this->normalizeDomain($url);
         $resultados = [];
         foreach ($htmlInfectados as $htmlInfectado) {
-            //dd($htmlInfectado);
             $htmlInfectadoPattern = $htmlInfectado;
             if (strpos($htmlInfectadoPattern, '<') !== 0) {
                 $htmlInfectadoPattern = '<' . $htmlInfectadoPattern;
@@ -34,7 +30,6 @@ class AtaqueSeoJapones
             $pattern = "/(" . preg_quote($htmlInfectadoPattern, '/') . ".*?(>|\/>))/si";
             preg_match_all($pattern, $html, $matches);
             if (!empty($matches[0])) {
-                //dd($html);
                 $resultados[] = [
                     'URL_ORIGEN' => $urlOrigen,
                     'URL infectada' => $urlResponse,
@@ -44,8 +39,6 @@ class AtaqueSeoJapones
                 ];
             }
         }
-
-        //dd($resultados);
         return $resultados;
     }
     private function extraUrlsScan($html, $url)
@@ -53,7 +46,6 @@ class AtaqueSeoJapones
         $pattern = '/https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?=\/|$)/i';
         preg_match_all($pattern, $html, $matches);
         $urls = array_unique($matches[0]);
-
         $infectedUrls = Incidente::whereIn('contenido', $urls)->get();
         return $infectedUrls->map(function ($infectedUrl) use ($url) {
             return [
@@ -78,11 +70,10 @@ class AtaqueSeoJapones
         $busquedaGoogle = new BusquedaGoogle();
         $client = new Client([
             RequestOptions::VERIFY => false,
-            RequestOptions::TIMEOUT => 30,
+            RequestOptions::TIMEOUT => 15,
             RequestOptions::ALLOW_REDIRECTS => ['track_redirects' => true],
         ]);
 
-        
         $promises = [];
         foreach ($urls as $url) {
             $promises[$url['url']] = $client->getAsync($url['url'], [
@@ -111,6 +102,7 @@ class AtaqueSeoJapones
 
         return $results;
     }
+    
     private function procesarRedirecciones($url, $redirects, $urlResponse)
     {
         $results = [];
@@ -131,4 +123,5 @@ class AtaqueSeoJapones
         }
         return $results;
     }
+
 }

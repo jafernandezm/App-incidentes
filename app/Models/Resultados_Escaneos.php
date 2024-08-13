@@ -15,11 +15,17 @@ class Resultados_Escaneos extends Model
     'data',
     'detalle',
     ];
+
+
+    // public function escaneo()
+    // {
+    //     //un escaneo tiene muchos resultados
+    //     return $this->belongsTo(Escaneos::class, 'id');
+    // }
+  
     public function escaneo()
     {
-        //un escaneo tiene muchos resultados
-        return $this->belongsTo(Escaneos::class, 'id');
+        // Relación uno a muchos
+        return $this->belongsTo(Escaneos::class, 'escaneo_id');
     }
-  
-
 }

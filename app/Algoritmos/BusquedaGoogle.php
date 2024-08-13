@@ -2,13 +2,10 @@
 
 
 // app/Algoritmos/AtaqueSeoHelper.php
-
 namespace App\Algoritmos;
-
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
-
 //models
 use App\Models\Incidente;
 class BusquedaGoogle
@@ -39,43 +36,30 @@ class BusquedaGoogle
         $results = [];
         foreach ($queries as $query) {
             $query = str_replace(' ', '%20', $query);
-            //dd($query);
             $url = 'https://www.google.com/search?q=' . $query . '&num=' . $numResults;
-            // if (count($this->proxy) > 0) {
-            //     $url = $this->proxy[0] . $url;
-            // }
             try {
                 $response = $client->request('GET', $url, [
                     'headers' => [
                         'origin' => 'x-requested-with',
                     ],
                 ]);
-                //dd($response);
                 $content = $response->getBody()->getContents();
-               
                 $dom = new \DOMDocument();
                 @$dom->loadHTML($content);
-               
-    
                 $links = $dom->getElementsByTagName('a');
                 foreach ($links as $link) {
                     $href = $link->getAttribute('href');
-                    
                     if (strpos($href, '/url?q=') === 0) {
                         $href = substr($href, strlen('/url?q='));
                         $href = urldecode($href);
                         $href = preg_replace('/&sa=.*$/i', '', $href);
-    
                         if (strpos($href, 'google.com') !== false || preg_match('/\.(pdf|img)$/i', $href)) {
                             continue;
                         }
-    
                         $titleElement = $link->getElementsByTagName('div')->item(0);
                         $title = $titleElement ? $titleElement->nodeValue : '';
-    
                         $relatedDataElement = $link->parentNode->parentNode->getElementsByTagName('div')->item(1);
                         $relatedData = $relatedDataElement ? $relatedDataElement->nodeValue : '';
-    
                         $results[] = [
                             'query' => $query,
                             'url' => $href,

@@ -27,14 +27,6 @@ class BaseController extends Controller
         return view('welcome');
     }
 
-    // public function show($id)
-    // {
-    //     //$escaneos = Escaneos::find($id);
-    //     return view('show', [
-    //         'escaneos' => $escaneos
-    //     ]);
-    // }
-
     public function enviar(Request $request)
     {
 

@@ -13,12 +13,10 @@ use Illuminate\Support\Str;
 class Escaneos extends Model
 {
     use HasFactory;
-    //escaneo_id, tipo, fecha, resultado
-      // Indica que 'id' no se autoincrementa y es un UUID
     protected $keyType = 'string';
     public $incrementing = false;
     protected $fillable = ['url','tipo','fecha','resultado'
-    ];
+     ,'detalles'];
     public function resultados()
     {   
         // Relación uno a muchos

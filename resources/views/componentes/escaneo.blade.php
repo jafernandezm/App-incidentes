@@ -41,8 +41,10 @@
                             </li>
                             <li><span class="font-medium">Archivos maliciosos:</span>
                                 {{ $detalles['cantidadIncidentes'] ?? '0' }}</li>
-                            <li><span class="font-medium">Archivos limpios:</span>
-                                {{ $detalles['cantidad'] - $detalles['cantidadIncidentes'] ?? '0' }}</li>
+                            <<li>
+                                <span class="font-medium">Archivos limpios:</span>
+                                {{ ($detalles['cantidad'] ?? 0) - ($detalles['cantidadIncidentes'] ?? 0) }}
+                            </li>
                             <li><span class="font-medium">Enlaces externos detectados:</span>
                                 {{ $detalles['external_links_detected'] ?? '0' }}</li>
 

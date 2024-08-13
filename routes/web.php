@@ -6,7 +6,8 @@ use App\Http\Controllers\PasivoScanController;
 use App\Http\Controllers\ActivosScanController;
 //base
 use App\Http\Controllers\BaseController;
-USE App\Http\Controllers\DatosFiltradosController;
+use App\Http\Controllers\DatosFiltradosController;
+use App\Http\Controllers\EscaneosController;
 
 // Route::get('/index', [BaseController::class, 'index'])->middleware(['auth', 'verified'])->name('index');
 
@@ -16,6 +17,9 @@ Route::post('/index', [PasivoScanController::class, 'scanWebsite'])->middleware(
 
 Route::get('/activo', [ActivosScanController::class, 'index'])->middleware(['auth', 'verified'])->name('activo.index');
 Route::post('/activo', [ActivosScanController::class, 'scanWebsite'])->middleware(['auth', 'verified'])->name('activo.scanWebsite');
+
+
+
 
 Route::get('/pasivo', [PasivoScanController::class, 'index'])->middleware(['auth', 'verified'])->name('pasivo.index');
 Route::post('/pasivo', [PasivoScanController::class, 'scanWebsite'])->middleware(['auth', 'verified'])->name('pasivo.scanWebsite');
@@ -30,7 +34,10 @@ Route::get('/index', [BaseController::class, 'index'])->middleware(['auth', 'ver
 Route::get('/index/{id}', [BaseController::class, 'show'])->middleware(['auth', 'verified'])->name('index.show');
 //por pos
 
-Route::post('/escaneo/enviar', [BaseController::class, 'enviar'])->name('escaneo.enviar');
+Route::post('/escaneo/enviar', [EscaneosController::class, 'enviar'])->name('escaneo.enviar');
+
+Route::get('/escaneo/detalles/{id}', [EscaneosController::class, 'show'])->name('escaneo.show');
+
 //necestio ir a escaneos y traerme los resultados
 
 

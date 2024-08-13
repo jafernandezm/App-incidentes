@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('tipo')->nullable();
             $table->date('fecha');
             $table->string('resultado');
+            $table->json('detalles')->nullable();
             $table->timestamps();         
         });
     }

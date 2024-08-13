@@ -45,7 +45,6 @@ class PasivoScanController extends Controller
             $query .= ' ' . implode(' ', $excludedSites);
         }
 
-        dd($query);
         $resutaldos = $Busqueda->googleSearch($queries = [$query], $timeout = 30, $numResults = $numResultsControl);
 
         $ataqueSeoJapones = $ataqueSeoJapones->AtaqueSeoJapones($resutaldos);
