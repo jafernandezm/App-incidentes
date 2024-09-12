@@ -16,6 +16,10 @@ services:
             - ./:/var/www
         networks:
             - test-network
+        dns:
+            - 8.8.8.8
+            - 8.8.4.4
+            - 1.1.1.1
         #command: php artisan migrate:fresh --seed
 
     web:

@@ -51,10 +51,8 @@ class ActivosScanController extends Controller
         $escaneo->tipo = 'ACTIVO';
         $escaneo->fecha = now();
         $escaneo->detalles= json_encode($ataqueNDSWResutaldo['data']) ?? '';
-
         $escaneo->resultado = $contadorTotal;
         $escaneo->save();
-        
         if($contadoResultadoSeoJapones >0){
             $resultados = new Resultados_Escaneos();
             $resultados->escaneo_id = $escaneo->id;
@@ -71,15 +69,10 @@ class ActivosScanController extends Controller
             $resultados->data = json_encode($ataqueNDSWResutaldo['results']);
             $resultados->save();
         }
-        $resultado = Resultados_Escaneos::where('escaneo_id', $escaneo->id)->get();
-
-        $message = $resultado->isEmpty() ? 'No se encontraron resultados.' : '';
-        if ($message !== '') {
-            return redirect()->back()->with('error', 'No se encontraron resultados.');
-        }
-        //dd($message);
+        $escaneo = Escaneos::where('id', $escaneo->id)->first();
         return view('activo.index', [
-            'resultados' => $resultado,
+            'escaneo' => $escaneo,
         ]);
+
     }    
 }

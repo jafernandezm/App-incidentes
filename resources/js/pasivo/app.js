@@ -17,3 +17,11 @@ document.getElementById('addButton').addEventListener('click', function() {
         dorkInput.value = '';
     }
 });
+
+
+
+
+function showLoader() {
+    document.getElementById('submit-btn').style.display = 'none';  // Oculta el botón de envío
+    document.getElementById('loader').style.display = 'block';     // Muestra el loader
+}

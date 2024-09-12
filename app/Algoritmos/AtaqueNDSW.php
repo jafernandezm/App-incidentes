@@ -58,7 +58,7 @@ class AtaqueNDSW
             }
         }
         $sucuriEscaner = new SitecheckSucuri();
-        $respuesta = $sucuriEscaner->apiSuciri($url);
+        $respuesta = $sucuriEscaner->apiSucuri($url);
 
         if (!empty($respuesta['wp-includes'])) {
             $jsFileUrls = $this->procesarWpIncludes($respuesta['wp-includes'], $respuesta['url_final']);

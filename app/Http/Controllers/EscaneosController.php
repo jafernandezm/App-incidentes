@@ -33,7 +33,7 @@ class EscaneosController extends Controller
             $uuid = $request->input('uuid');
             $escaneo = Escaneos::where('id', $uuid)->first();     
             
-            return view('componentes.escaneo', [
+            return view('pasivo.resultado', [
                 'escaneo' => $escaneo
             ]);
         } elseif ($tipo == 'ACTIVO') {
@@ -42,7 +42,7 @@ class EscaneosController extends Controller
             $escaneo = Escaneos::where('id', $uuid)->with('resultados')->first();
           
             //dd($escaneo->resultados->toArray());
-            return view('componentes.escaneo', [
+            return view('activo.resultado', [
                 'escaneo' => $escaneo,
                 'resultados' => $escaneo->resultados->toArray()
             ]);
@@ -69,8 +69,8 @@ class EscaneosController extends Controller
     public function show($uuid)
     {
         $resultados = Resultados_Escaneos::where('escaneo_id', $uuid)->get();
-        //resources/views/componentes/resultado.blade.php
-        return view('componentes.resultado', [
+        
+        return view('escaneo.resultado', [
             'resultados' => $resultados
         ]);
     }

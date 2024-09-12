@@ -8,7 +8,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/pasivo/app.js',
-                'resources/js/componets/table.js'
+                'resources/js/components/table.js' // Corrige aquí si es necesario
             ],
             refresh: true,
         }),

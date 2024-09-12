@@ -2,7 +2,6 @@
 
 namespace App\Algoritmos;
 
-
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use GuzzleHttp\RequestOptions;
@@ -17,6 +16,7 @@ use App\Algoritmos\BusquedaGoogle;
 
 class AtaqueSeoJapones
 {
+
     private function buscarHtmlInfectado($html, $urlResponse, $url)
     {
         $htmlInfectados = Incidente::where('tipo_id', 2)->pluck('contenido')->toArray();   
@@ -41,6 +41,7 @@ class AtaqueSeoJapones
         }
         return $resultados;
     }
+    
     private function extraUrlsScan($html, $url)
     {
         $pattern = '/https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?=\/|$)/i';
@@ -55,13 +56,6 @@ class AtaqueSeoJapones
                 'tipo' => 'url_infectada',
             ];
         })->toArray();
-    }
-
-    private function normalizeDomain($url)
-    {
-        $parsedUrl = parse_url($url);
-        $host = $parsedUrl['host'] ?? '';
-        return preg_replace('/^www\./', '', $host);
     }
     
     public function AtaqueSeoJapones($urls)
@@ -99,19 +93,40 @@ class AtaqueSeoJapones
                 $results = array_merge($results, $this->buscarHtmlInfectado($html, $urlResponse, $url));
             }
         }
-
         return $results;
     }
-    
+
+    private function normalizeDomain($url)
+    {
+        $parsedUrl = parse_url($url);
+        $host = $parsedUrl['host'] ?? '';
+        return preg_replace('/^www\./', '', $host);
+    }
+
     private function procesarRedirecciones($url, $redirects, $urlResponse)
     {
         $results = [];
         $domain = $this->normalizeDomain($url);
         $uniqueRedirects = [];
-
+    
         foreach ($redirects as $redirect) {
             $redirectDomain = $this->normalizeDomain($redirect);
-            if ($redirectDomain !== $domain && !in_array($redirect, $uniqueRedirects)) {
+    
+            // Crear las diferentes versiones de la URL (http, https, con www y sin www)
+            $httpUrl = "http://{$redirectDomain}";
+            $httpsUrl = "https://{$redirectDomain}";
+            $httpWwwUrl = "http://www.{$redirectDomain}";
+            $httpsWwwUrl = "https://www.{$redirectDomain}";
+    
+            // Validar si es la misma redirección con http, https, con y sin www
+            if (
+                $redirectDomain !== $domain && 
+                !in_array($redirect, $uniqueRedirects) &&
+                $redirect !== $httpUrl && 
+                $redirect !== $httpsUrl && 
+                $redirect !== $httpWwwUrl && 
+                $redirect !== $httpsWwwUrl
+            ) {
                 $uniqueRedirects[] = $redirect;
                 $results[] = [
                     'URL_ORIGEN' => $url,

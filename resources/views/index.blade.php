@@ -1,6 +1,7 @@
 <x-index-layout>
-    @vite('resources/js/table.js') 
+   
     @section('content')
+      
         <div class="bg-white white:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 {{ __("Bienvenidos") }}

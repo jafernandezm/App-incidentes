@@ -13,6 +13,6 @@ class ResultadoCard extends Component
     }
     public function render()
     {
-        return view('componentes.resultado-card');
+        return view('componentes.escaneos.resultado-card');
     }
 }

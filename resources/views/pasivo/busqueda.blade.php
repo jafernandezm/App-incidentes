@@ -1,5 +1,5 @@
-<div class="mt-4 flex flex-col justify-center items-center p-4 rounded-lg shadow-md space-y-2">
-    <h1 class="text-2xl font-bold text-center">Escanear</h1>
+<div class="mt-4 flex flex-col justify-center items-center p-4 rounded-lg space-y-2">
+    <h1 class="text-2xl font-bold text-center m-2">Escanear</h1>
     <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md white:bg-gray-800">
         <form method="POST" action="{{ route('pasivo.scanWebsite') }}">
             @csrf

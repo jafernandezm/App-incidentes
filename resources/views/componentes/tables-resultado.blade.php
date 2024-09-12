@@ -1,7 +1,7 @@
 <x-app-layout>
     {{-- {{dd($resultados)}} --}}
     @section('content')
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        {{-- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white white:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 black-gray-900 black:text-gray-100">
                     {{ __('Pasivos') }}
@@ -56,6 +56,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     @endsection
 </x-app-layout>

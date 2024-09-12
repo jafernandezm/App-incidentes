@@ -40,6 +40,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN echo '#!/bin/sh\n\
 echo "nameserver 127.0.0.1" > /etc/resolv.conf\n\
 echo "nameserver 8.8.8.8" >> /etc/resolv.conf\n\
+echo "nameserver 8.8.4.4" >> /etc/resolv.conf\n\
 echo "nameserver 1.1.1.1" >> /etc/resolv.conf' > /tmp/update-resolv-conf.sh
 
 # Install PHP extensions

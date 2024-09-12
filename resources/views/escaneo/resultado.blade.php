@@ -1,5 +1,5 @@
 <x-app-layout>
     @section('content')
-       @include('componentes.escaneos.escaneo')
+        @include('componentes.escaneos.resultado')
     @endsection
 </x-app-layout>

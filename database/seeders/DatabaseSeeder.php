@@ -81,6 +81,12 @@ class DatabaseSeeder extends Seeder
               'fecha' => '2024-06-22'
           ],
           [
+            'tipo_id' => 2,
+            'contenido' => '<script>window.location=',
+            'descripcion' => 'HTML infectado',
+            'fecha' => '2024-06-22'
+            ],
+          [
               'tipo_id' => 2,
               'contenido' => '<meta http-equiv="refresh" ',
               'descripcion' => 'HTML infectado',
@@ -88,13 +94,13 @@ class DatabaseSeeder extends Seeder
           ],
           [
               'tipo_id' => 3,
-              'contenido' => 'site:gob.bo japan',
+              'contenido' => 'site:gob.bo -filetype:pdf japan',
               'descripcion' => 'dorksPasivo',
               'fecha' => '2024-06-22'
           ],
           [
               'tipo_id' => 4,
-              'contenido' => 'japan',
+              'contenido' => '-filetype:pdf japan',
               'descripcion' => 'dorksActivo',
               'fecha' => '2024-06-22'
           ],
