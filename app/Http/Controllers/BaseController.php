@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-//resultado
-use App\Models\Resultados_Escaneos;
+
 
 //escaneos
 use App\Models\Escaneos;
 use App\Models\datos_filtrados;
-
+//resultado
+use App\Models\Resultados_Escaneos;
 class BaseController extends Controller
 {
     public function index()

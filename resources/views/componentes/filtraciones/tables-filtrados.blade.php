@@ -27,7 +27,7 @@
                             @foreach ($data as $entry)
                                 <div class="mb-4">
                                     @if (isset($entry['email']))
-                                        <p class="font-medium text-gray-700 break-words">Email: <span class="text-gray-600 break-all">{{ $entry['email'] }}</span></p>
+                                        <p class="font-medium filtradostext-gray-700 break-words">Email: <span class="text-gray-600 break-all">{{ $entry['email'] }}</span></p>
                                     @endif
                                     @if (isset($entry['has_password']))
                                         <p class="font-medium text-gray-700 break-words">Has Password: <span class="text-gray-600 break-all">{{ $entry['has_password'] ? 'Yes' : 'No' }}</span></p>

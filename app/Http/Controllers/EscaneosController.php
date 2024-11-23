@@ -74,6 +74,7 @@ class EscaneosController extends Controller
             'resultados' => $resultados
         ]);
     }
+    
     public function edit(Escaneos $escaneos)
     {
         //

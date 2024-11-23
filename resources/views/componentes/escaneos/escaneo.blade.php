@@ -28,7 +28,7 @@
                     <li><span class="font-medium">Dirección IP:</span> {{ $detalles['IP'] ?? 'Desconocido' }}</li>
                     <li><span class="font-medium">País:</span> {{ $detalles['country'] ?? 'Desconocido' }}</li>
                     <li><span class="font-medium">Servidor:</span> {{ $detalles['HTTPServer'] ?? 'Desconocido' }}</li>
-                    <li><span class="font-medium">CMS:</span> {{ $cmsText }}</li>
+                    <li><span class="font-medium">CMS:</span> {{  }}</li>
                     <li><span class="font-medium">Fecha del escaneo:</span> {{ \Carbon\Carbon::parse($escaneo['fecha'])->format('D Y/m/d') }}</li>
                 </ul>
             </div>
